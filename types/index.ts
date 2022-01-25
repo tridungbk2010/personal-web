@@ -9,3 +9,5 @@ export type Post = {
   content: string;
   meta: PostMeta;
 };
+
+export type DarkMode = 'light' | 'dark' | 'none';

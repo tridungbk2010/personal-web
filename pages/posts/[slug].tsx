@@ -17,6 +17,7 @@ import Layout from '../../components/Layout';
 import YouTube from '../../components/Youtube';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/night-owl.css';
+import Content from '../../components/Content';
 
 type MdxPost = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -31,10 +32,10 @@ const Post: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <Head>
         <title>{post.meta.title}</title>
       </Head>
-      <h1 className="text-3xl font-black">{post.meta.title}</h1>
-      <div className="prose lg:prose-xl">
+      <Content>
+        <h1>{post.meta.title}</h1>
         <MDXRemote {...post.source} components={{ YouTube, Image }} />
-      </div>
+      </Content>
     </Layout>
   );
 };

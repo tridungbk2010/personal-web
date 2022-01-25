@@ -9,7 +9,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }) => {
   return (
     <Layout>
-      <Articles posts={posts} title="Articles" />
+      <Articles posts={posts} title="Blog" />
     </Layout>
   );
 };
