@@ -26,8 +26,8 @@ const links = [
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="dark:bg-gray-800 min-h-screen">
-      <div className="max-w-5xl mx-auto flex justify-between items-center">
+    <>
+      <div className="max-w-screen-md mx-auto flex justify-between items-center">
         <nav className="space-x-5 h-16 flex items-center">
           {links.map((link) =>
             link.external ? (
@@ -50,8 +50,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
         </nav>
         <DarkModeToggle />
       </div>
-      <div className="max-w-5xl mx-auto py-8">{children}</div>
-    </div>
+      <div className="max-w-screen-md mx-auto py-8">{children}</div>
+    </>
   );
 };
 

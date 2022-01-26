@@ -1,37 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 import LightIcon from './icons/LightIcon';
 import DarkIcon from './icons/DarkIcon';
 
-function isDarkModeSystem(): boolean {
-  return (
-    localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches)
-  );
-}
-
 const DarkModeToggle = () => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(isDarkModeSystem);
+  const { theme, setTheme } = useTheme();
 
-  function toggle() {
-    setIsDarkMode(!isDarkMode);
-    window.localStorage.theme = isDarkMode ? 'light' : 'dark';
+  function onSwitch() {
+    setTheme(theme === 'light' ? 'dark' : 'light');
   }
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
-
   return (
     <div>
       <button
         className="w-9 h-9 bg-gray-200 rounded-lg dark:bg-gray-600 flex items-center justify-center hover:ring-2 ring-gray-300 transition-all"
-        onClick={toggle}
+        onClick={onSwitch}
       >
-        {isDarkMode ? <LightIcon /> : <DarkIcon />}
+        {theme === 'dark' ? <LightIcon /> : <DarkIcon />}
       </button>
     </div>
   );
