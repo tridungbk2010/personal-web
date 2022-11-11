@@ -21,7 +21,7 @@ export const getStaticProps: GetStaticProps<{
 }> = async () => {
   const posts = getAllPosts()
     .slice(0, 9)
-    .map((post) => post.meta);
+    .map((post) => post.meta).reverse();
 
   return {
     props: {

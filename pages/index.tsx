@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Layout from '../components/Layout';
 import { PostMeta } from '../types';
 import { getAllPosts } from '../@api';
+import avatarUrl from '../public/chrisho.jpeg'
+import { displayDate } from '../utils/dateTime';
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   posts,
@@ -25,11 +27,11 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         </div>
         <div>
           <Image
-            src="/chrisho.jpeg"
-            objectFit="contain"
+            src={avatarUrl}
             className="rounded-full"
             width={128}
             height={128}
+            alt="avatar"
           />
         </div>
       </div>
@@ -40,13 +42,15 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <div className="space-y-5">
           {posts.map((post) => (
             <div key={post.slug}>
-              <Link href={`/posts/${post.slug}`}>
-                <a className="text-xl font-bold text-teal-400 hover:text-teal-500 dark:text-teal-500 dark:hover:text-white">
-                  {post.title}
-                </a>
+              <Link
+                href={`/posts/${post.slug}`}
+                className="text-xl font-bold text-teal-400 hover:text-teal-500 dark:text-teal-500 dark:hover:text-white">
+
+                {post.title}
+
               </Link>
               <p className="text-gray-600 text-sm dark:text-gray-500">
-                {post.date}
+                {displayDate(post.date)}
               </p>
               <p className="text-gray-600 max-w-xl mt-2 dark:text-gray-400">
                 {post.excerpt}
@@ -65,8 +69,7 @@ export const getStaticProps: GetStaticProps<{
   posts: PostMeta[];
 }> = async () => {
   const posts = getAllPosts()
-    .slice(0, 2)
-    .map((post) => post.meta);
+    .map((post) => post.meta).reverse().slice(0, 2);
   return {
     props: {
       posts,

@@ -25,34 +25,36 @@ const links = [
 ];
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  return (
-    <>
-      <div className="max-w-screen-md mx-auto flex justify-between items-center">
-        <nav className="space-x-5 h-16 flex items-center">
-          {links.map((link) =>
-            link.external ? (
-              <a
-                href={link.href}
-                className="text-gray-800 dark:text-white hover:text-blue-500"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {link.name}
-              </a>
-            ) : (
-              <Link href={link.href} key={link.id}>
-                <a className="text-gray-800 dark:text-white hover:text-blue-500">
-                  {link.name}
-                </a>
-              </Link>
-            ),
-          )}
-        </nav>
-        <DarkModeToggle />
-      </div>
-      <div className="max-w-screen-md mx-auto py-8">{children}</div>
-    </>
-  );
+  return <>
+    <div className="max-w-screen-md mx-auto flex justify-between items-center">
+      <nav className="space-x-5 h-16 flex items-center">
+        {links.map((link) =>
+          link.external ? (
+            <a
+              key={link.id}
+              href={link.href}
+              className="text-gray-800 dark:text-white hover:text-blue-500"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {link.name}
+            </a>
+          ) : (
+            (<Link
+              href={link.href}
+              key={link.id}
+              className="text-gray-800 dark:text-white hover:text-blue-500">
+
+              {link.name}
+
+            </Link>)
+          ),
+        )}
+      </nav>
+      <DarkModeToggle />
+    </div>
+    <div className="max-w-screen-md mx-auto py-8">{children}</div>
+  </>;
 };
 
 export default Layout;

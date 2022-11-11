@@ -9,19 +9,24 @@ const Articles = ({ title, posts }: { posts: PostMeta[]; title?: string }) => {
         {posts.map((post) => (
           <li key={post.slug}>
             <div>
-              <Link href={`/posts/${post.slug}`}>
-                <a className="dark:text-teal-400 font-bold text-xl hover:text-gray-500 dark:hover:text-teal-300">
-                  {post.title}
-                </a>
+              <Link
+                href={`/posts/${post.slug}`}
+                className="dark:text-teal-400 font-bold text-xl hover:text-gray-500 dark:hover:text-teal-300">
+
+                {post.title}
+
               </Link>
               <p className="max-w-xl pt-2">{post.excerpt}</p>
               <div className="space-x-3 mt-5">
                 {post.tags?.map((tag) => (
-                  <Link href={`/tags/${tag}`} key={tag}>
-                    <a className="text-gray-500 py-1 px-3 dark:bg-gray-700 dark:hover:text-gray-100 bg-slate-100 rounded-xl text-sm hover:text-gray-800">
-                      {tag}
-                    </a>
-                  </Link>
+                  (<Link
+                    href={`/tags/${tag}`}
+                    key={tag}
+                    className="text-gray-500 py-1 px-3 dark:bg-gray-700 dark:hover:text-gray-100 bg-slate-100 rounded-xl text-sm hover:text-gray-800">
+
+                    {tag}
+
+                  </Link>)
                 ))}
               </div>
             </div>
